@@ -1,0 +1,27 @@
+﻿<h1>Список готовых вопросов для брифа</h1>
+<%= form_tag({:controller => "information", :action => "select_information"}, :method => "get", :class => "find_information") do   %>
+    <div style="margin:0;padding:0">
+       <input name="project_id" type="hidden" value=<%= params[:project_id] %> >
+    </div>
+    <%= label_tag(:txt_find_information, "Отбор по категории:") %>
+    <% information_array = Information.select("category").uniq.map { |information| [information.category, information.category] } %>
+    <%= select_tag(:category, options_for_select(information_array),  :include_blank => true) %><%= submit_tag("Отобрать") %>
+<% end %> <%= will_paginate @information %>
+<table>
+    <% @current_category = "" %>
+    <% @current_sybcategory = "" %>
+  
+    <% @information.each do |information| %>
+      <% if @current_category != information.category %>
+          <tr><th><br><h2><%= information.OrderCategory.to_i %>. <%= information.category %></h2></th><th>&nbsp;</th></tr>
+      <% end %>
+      <% if @current_sybcategory != information.subcategory %>
+          <tr><th><h3><%= information.subcategory %></h3></th><th>&nbsp;</th></tr>
+      <% end %>      
+      <tr><td><%== information.demand %><br><%== information.answer %></td>
+	  <td>&nbsp;<a href="/matters/new?project_id=<%= params[:project_id] %>&information_id=<%= information.id %> "> Добавить </a></td></tr>
+      <% @current_category    = information.category %>
+      <% @current_sybcategory = information.subcategory %>
+    <% end %>
+</table>
+

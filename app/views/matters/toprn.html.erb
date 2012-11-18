@@ -1,0 +1,24 @@
+﻿<h3>Содержание брифа <%= @projects.name %> </h3>
+
+<% if @matters != nil %>
+<table>
+    <% @current_category = "" %>
+    <% @current_sybcategory = "" %>
+
+    <% @matters.each do |matter| %>
+      <% if @current_category != matter.category %>
+          <tr><th><br><h3><%= matter.ordercategory.to_i %>. <%= matter.category %></h3></th><th>&nbsp;</th><th>&nbsp;</th></tr>
+      <% end %>
+      <% if @current_sybcategory != matter.sybcategory %>
+          <tr><th><h4><%= matter.sybcategory %></h4></th><th>&nbsp;</th><th>&nbsp;</th></tr>
+      <% end %>
+      <tr><td><%== matter.demand %><br><%== matter.answer %></td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+      </tr>
+          
+      <% @current_category    = matter.category %>
+      <% @current_sybcategory = matter.sybcategory %>
+    <% end %>
+</table>
+<% end %>

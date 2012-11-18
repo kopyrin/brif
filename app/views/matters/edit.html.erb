@@ -1,0 +1,20 @@
+﻿<% content_for :head do %>
+    <link rel="stylesheet" type="text/css" href="/assets/jquery.cleditor.css" />
+    <script src="/assets/jquery.min.js" type="text/javascript" ></script>
+    <script src="/assets/jquery.cleditor.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+	  
+	  $(document).ready(function() {
+        $("#demand").cleditor({  
+		  width: 800,   height: 250  });
+	  });
+      $(document).ready(function() {
+        $("#answer").cleditor({  
+		  width: 800,   height: 250  });
+	  });	
+	  
+    </script>
+<% end %>
+<h3>Редактирование вопроса брифа</h3>
+<a href="/matters?project_id=<%= params[:project_id] %>"> К составу брифа </a>
+<%= render 'form' %>

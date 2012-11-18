@@ -1,0 +1,45 @@
+﻿<%= form_for(@matter) do |f| %>
+  <% if @matter.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@matter.errors.count, "error") %> prohibited this matter from being saved:</h2>
+      <ul>
+      <% @matter.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div style="margin:0;padding:0">
+    <input name="project_id" type="hidden" value=<%= params[:project_id] %> >
+  </div>
+  <div class="actions">
+    <%= f.submit "Записать" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Вопрос %>
+    <textarea id="demand" name="matter[demand]">
+ 	  <%= @matter.demand %>
+    </textarea>	
+  </div>
+  <div class="field">
+    <%= f.label :Ответ %>
+    <textarea id="answer" name="matter[answer]">
+      <%= @matter.answer %>
+    </textarea>	
+  </div>
+  <div class="field">
+    <%= f.label :Категория %>
+    <%= f.text_field :category %>
+  </div>
+  <div class="field">
+    <%= f.label :Субкатегория %>
+    <%= f.text_field :sybcategory %>
+  </div>
+  <div class="field">
+    <%= f.label :Порядок_в_категориях %>
+    <%= f.number_field :ordercategory %>
+  </div>
+<% end %>
+

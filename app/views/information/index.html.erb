@@ -1,0 +1,25 @@
+﻿<h1>Список готовых вопросов для брифа</h1>
+<%= form_tag({:controller => "information", :action => "index"}, :method => "get", :class => "find_information") do   %>
+    <%= label_tag(:txt_find_information, "Фильтр по категории:") %>
+    <% information_array = Information.select("category").uniq.map { |information| [information.category, information.category] } %>
+    <%= select_tag(:category, options_for_select(information_array),  :include_blank => true) %>
+    <%= submit_tag("Отфильтровать") %>
+<% end %> <%= will_paginate @information %>
+<%= link_to 'Новая запись', new_information_path %>
+<table>
+    <% @current_category = "" %>
+    <% @current_sybcategory = "" %>
+  
+    <% @information.each do |information| %>
+      <% if @current_category != information.category %>
+          <tr><th><br><h2><%= information.OrderCategory.to_i %>. <%= information.category %></h2></th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th></tr>
+      <% end %>
+      <% if @current_sybcategory != information.subcategory %>
+          <tr><th><h3><%= information.subcategory %></h3></th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th></tr>
+      <% end %>      
+      <tr><td><%== information.demand %><br><%== information.answer %></td><td>&nbsp;<%= link_to " Показать ", information %></td><td>&nbsp;&nbsp;<%= link_to " Изменить ", edit_information_path(information) %></td><td>&nbsp;&nbsp;<%= link_to " Удалить ", information, method: :delete, data: { confirm: 'Вы уверенны?' } %></td></tr>
+      <% @current_category    = information.category %>
+      <% @current_sybcategory = information.subcategory %>
+    <% end %>
+</table>
+

@@ -1,0 +1,34 @@
+﻿<h3>Содержание брифа <%= @projects.name %> </h3>
+<%= form_tag({:controller => "matters", :action => "index"}, :method => "get", :class => "find_information") do   %>
+    <div style="margin:0;padding:0">
+       <input name="project_id" type="hidden" value=<%= params[:project_id] %> >
+    </div>
+    <%= label_tag(:txt_find_information, "Отбор по категории:") %>
+    <% information_array = Matter.select("category").where("project_id = ?", params[:project_id]).uniq.map { |matters| [matters.category, matters.category] } %>
+    <%= select_tag(:category, options_for_select(information_array),  :include_blank => true) %><%= submit_tag("Отобрать") %>
+<% end %>
+
+<%= link_to 'К списку брифов', projects_path %><br>
+<%= will_paginate @matter %>
+<a href="/select_information?project_id=<%= params[:project_id] %>"> Новый вопрос </a>
+<% if @matters != nil %>
+<table>
+    <% @current_category = "" %>
+    <% @current_sybcategory = "" %>
+
+    <% @matters.each do |matter| %>
+      <% if @current_category != matter.category %>
+          <tr><th><br><h3><%= matter.ordercategory.to_i %>. <%= matter.category %></h3></th><th>&nbsp;</th><th>&nbsp;</th></tr>
+      <% end %>
+      <% if @current_sybcategory != matter.sybcategory %>
+          <tr><th><h4><%= matter.sybcategory %></h4></th><th>&nbsp;</th><th>&nbsp;</th></tr>
+      <% end %>
+      <tr><td><%== matter.demand %><br><%== matter.answer %></td>
+	      <td>&nbsp;&nbsp;<a href="/matters/<%= matter.id %>/edit/?project_id=<%= params[:project_id] %>"> Изменить </a></td>
+		  <td>&nbsp;&nbsp;<a href="/matters/<%= matter.id %>?project_id=<%= params[:project_id] %>" data-confirm="Вы уверенны?" data-method="delete" rel="nofollow"> Удалить </a></td></tr>
+		  
+      <% @current_category    = matter.category %>
+      <% @current_sybcategory = matter.sybcategory %>
+    <% end %>
+</table>
+<% end %>

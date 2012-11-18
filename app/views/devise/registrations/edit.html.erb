@@ -1,0 +1,28 @@
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :Имя %><br />
+  <%= f.text_field :name %></div>
+
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email %></div>
+
+  <div><%= f.label :Пароль %> <i>(оставьте пустым, если вы не хотите изменить его)</i><br />
+  <%= f.password_field :password, :autocomplete => "off" %></div>
+
+  <div><%= f.label :Повторите_пароль %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+  <div><%= f.label :Текущий_пароль %> <i>(нам необходим ваше текущий пароль для подтверждения изменений)</i><br />
+  <%= f.password_field :current_password %></div>
+
+  <div><%= f.submit "Обновить" %></div>
+<% end %>
+
+<h3>Выход из учетной записи</h3>
+
+<p>Неудача? <%= link_to "Выйти из учетной записи", registration_path(resource_name), :data => { :confirm => "Вы уверены?" }, :method => :delete %>.</p>
+
+<%= link_to "Назад", :back %>

@@ -1,0 +1,30 @@
+﻿<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Вопрос:</b>
+  <%== @matter.demand %>
+</p>
+
+<p>
+  <b>Ответ:</b>
+  <%== @matter.answer %>
+</p>
+
+<p>
+  <b>Категория:</b>
+  <%= @matter.category %>
+</p>
+
+<p>
+  <b>Подкатегория:</b>
+  <%= @matter.sybcategory %>
+</p>
+
+<p>
+  <b>Порядок в категории:</b>
+  <%= @matter.ordercategory %>
+</p>
+
+
+<%= link_to 'Редактировать', edit_matter_path(@matter) %> |
+<%= link_to 'К списку', matters_path %>

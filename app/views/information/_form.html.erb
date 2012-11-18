@@ -1,0 +1,37 @@
+<%= form_for(@information) do |f| %>
+  <% if @information.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@information.errors.count, "error") %> prohibited this information from being saved:</h2>
+
+      <ul>
+      <% @information.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="field">
+       <%= f.label :Категория %><%= text_area_tag  :category, @information.category,  :rows => "3", :cols => "100" %>
+   </div>
+     <div class="field">
+       <%= f.label :Очередность_категории %><%= f.number_field  :category, @information.OrderCategory  %>
+   </div>  
+     <div class="field">
+       <%= f.label :Подкатегория %><%= text_area_tag  :subcategory, @information.subcategory,  :size => "24x6" %>
+   </div>  
+  <div class="field">
+    <%= f.label :Вопрос %>
+    <textarea id="demand" name="information[demand]">
+ 	  <%= @information.demand %>
+    </textarea>	
+  </div>
+  <div class="field">
+    <%= f.label :Ответ %>
+    <textarea id="answer" name="information[answer]">
+	  <%= @information.answer %>
+    </textarea>		
+  </div>
+  <div class="actions">
+    <%= f.submit "Записать" %>
+  </div>
+<% end %>

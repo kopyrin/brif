@@ -1,0 +1,65 @@
+<%= form_tag({:controller => "projects", :action => "index"}, :method => "get", :class => "find_value") do   %>
+<%= label_tag(:txt_find, "Отбор по:") %>
+<%= select_tag(:select_search, options_for_select([['пользователю', 1], ['№ брифа', 2], ['названию', 3]]),  :include_blank => true) %>
+<%= search_field(:value_select, :searh_value) %>
+<%= submit_tag("Отобрать") %>
+<% end %>
+
+
+<% case %> 
+<% when params[:select_search].to_i == 1 %>
+<h3>Список брифов пользователя "<%= params[:value_select][:searh_value] %>"</h3>
+<% when params[:select_search].to_i == 2 %>
+<h3>Бриф № <%= params[:value_select][:searh_value] %></h3>
+<% when params[:select_search].to_i == 3 %>
+<h3>Брифы с названием "<%= params[:value_select][:searh_value] %>"</h3>
+<% else %>
+<h3>Список брифов</h3>
+<% end %>
+
+<%= will_paginate @information %>
+
+<% if user_signed_in? %>
+<p> <%= link_to "Новый бриф", new_project_path %> </p>
+<% end %>
+
+<% if @projects != nil %>
+<table cellspacing="1" border="0">
+  <tr>
+    <td><p align=center>&nbsp;&nbsp;№ </p> </td>
+    <td><p align=center>&nbsp;&nbsp;Автор</p> </td>
+    <td><p align=center>&nbsp;&nbsp;Название</p></td>
+    <td><p align=center>&nbsp;&nbsp;Тип</p></td>
+    <td colspan="4" >&nbsp;</td>
+  </tr>
+<% @projects.each do |project| %>
+    <% if project.user_id != @user.id  and project.grave %>
+        <% next %>
+    <% end %>    
+      <tr>
+        <td><p align=center><%= project.id %></p> </td>
+        <td>&nbsp;<%= project.autor %> </td>
+        <td>&nbsp;<%= project.name %>&nbsp;
+
+        <td>&nbsp; 
+		<% if project.grave %>
+		  Закрытый
+		<% else %>
+		  Открытый
+		<% end %>
+		</td>
+        <td>&nbsp;<a href="/matters?project_id=<%= project.id %>">Содержание</a></td>
+        <% if project.user_id == @user.id %>
+            <td>&nbsp;<%= link_to " Изменить ", edit_project_path(project) %>&nbsp;</td>
+            <td>&nbsp;<%= link_to " Удалить ", project, method: :delete, data: { confirm: 'Вы уверенны?' } %>&nbsp;</td>
+        <% else %>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        <% end %>
+        <td>&nbsp;<a href="/toprn/?project_id=<%= project.id %>">Версия для печати</a></td>
+      </tr>
+
+<% end %>
+</table>
+<% end %>
+<br />

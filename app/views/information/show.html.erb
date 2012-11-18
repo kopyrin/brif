@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Категория:</b>
+  <%== @information.category %>
+</p>
+<p>
+  <b>Подкатегория:</b>
+  <%== @information.subcategory %>
+</p>
+<p>
+  <b>Вопрос:</b>
+  <%== @information.demand %>
+</p>
+
+<p>
+  <b>Ответ:</b>
+  <%== @information.answer %>
+</p>
+
+
+<%= link_to 'Редактировать', edit_information_path(@information) %> |
+<%= link_to 'Общий список', information_index_path %>
