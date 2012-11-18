@@ -7,7 +7,6 @@ gem "cancan", ">= 1.6.7"
 gem "rolify", ">= 3.1.0"
 gem "bootstrap-sass", ">= 2.0.1"
 gem 'will_paginate', '~> 3.0.0'
-gem 'mysql2'
 
 
 group :assets do
@@ -17,6 +16,8 @@ group :assets do
 end
 
 group :test, :development do  
+
+    gem 'mysql2'
 	gem 'rspec'  
 	gem 'rspec-rails'  
 	gem 'minitest-rails'  
@@ -35,8 +36,9 @@ group :test, :development do
 	gem 'rails-footnotes'
 	gem 'rb-inotify'
 	gem 'yaml_db'
+	gem 'rails_best_practices'
 end
 
-gem 'rails_best_practices'
+
 
 
