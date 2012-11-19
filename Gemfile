@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 gem 'rails', '3.2.8'
-gem 'sqlite3'
+gem 'mysql2'
 gem 'jquery-rails'
 gem "devise", ">= 2.1.0.rc"
 gem "cancan", ">= 1.6.7"
@@ -14,31 +14,6 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end
-
-group :test, :development do  
-
-    gem 'mysql2'
-	gem 'rspec'  
-	gem 'rspec-rails'  
-	gem 'minitest-rails'  
-	gem 'shoulda-matchers'  
-	gem 'cucumber'  
-	gem 'cucumber-rails', :require => false  
-	gem 'capybara'  
-	gem 'factory_girl_rails'  
-	gem 'database_cleaner'  
-	gem 'spork'  
-	gem 'spork-rails'  
-	gem 'guard'  
-	gem 'guard-spork'  
-	gem 'guard-rspec'  
-	gem 'guard-cucumber'  
-	gem 'rails-footnotes'
-	gem 'rb-inotify'
-	gem 'yaml_db'
-	gem 'rails_best_practices'
-end
-
 
 
 
