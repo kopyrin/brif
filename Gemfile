@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+﻿source 'https://rubygems.org'
 gem 'rails', '3.2.8'
 gem 'mysql2'
 gem 'jquery-rails'
@@ -18,7 +18,7 @@ group :test, :development do
     gem 'minitest-rails'  
     gem 'shoulda-matchers'  
     gem 'cucumber'  
-    gem 'cucumber-rails', :require => false  
+    gem 'cucumber-rails', :require => false
     gem 'capybara'  
     gem 'factory_girl_rails'  
     gem 'database_cleaner'  
